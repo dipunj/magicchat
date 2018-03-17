@@ -4,7 +4,7 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 
-import juicer
+import juicer, mood
 chats = []
 
 # Enable logging
@@ -41,12 +41,13 @@ def help(bot, update):
 def driver(bot, update):
     """Record the user messages."""
     global chats
-    chats.append([update.message.from_user.username,update.message.text])
+    chats.append(update.message.text)
+    # [update.message.from_user.username,
 
 def juice(bot, update):
     """Prints all the messages."""
     global chats
-    update.message.reply_text("THE JUICE IS : " + str(list2dic(chats)))
+    update.message.reply_text("THE JUICE IS : " + str(juicer.textrank(str(chats))))
     chats = []
 
 def error(bot, update, error):
