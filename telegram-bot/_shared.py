@@ -3,3 +3,4 @@
 
 # list of list
 chats = []
+counter = 0

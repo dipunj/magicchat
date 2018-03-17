@@ -30,12 +30,22 @@ def start(bot, update):
 # invoking the /help command
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text()
+    update.message.reply_text('/juice - extract the messages \
+                               /mood - shows the mood of the user(s)\
+                               /translate - translate to another language\
+                               /help - prints help\
+                               /start - shows a greeting message')
 
 # keeps on rolling when the conversation is in progress
 def driver(bot, update):
     # stores username and the text sent by that user
     _shared.chats.append([update.message.from_user.username,update.message.text])
+    if _shared.counter < 5:
+        mood(bot,update)
+        _shared.counter += 1
+        pass
+    else :
+        _shared.counter = 0
 
 # juices out the essential information messages stored in global variable chat
 def juice(bot, update):
@@ -45,6 +55,7 @@ def juice(bot, update):
     for key in temp:
         big += temp[key][0]+"."
     pass
+    print(big)
 
     update.message.reply_text(str(juicer.textrank(big)))
     _shared.chats = []
@@ -57,7 +68,25 @@ def error(bot, update, error):
 # Calculates mood(most likely) of all users based on their previous chats
 def mood(bot, update):
     """Calculates mood"""
-    update.message.reply_text(str(moody.evaluate(list2dic(_shared.chats))))
+
+    # Don't use my mood
+    me = update.message.from_user.username
+
+    # Get list of everyone's moods
+    mooddict = moody.evaluate(list2dic(_shared.chats))
+
+    # To print in a more suitable way
+    str = "Name | mood \n"
+    strorg = str
+
+    for key in mooddict:
+        if key != me:
+            str = str + key + " | " + mooddict[key] + "\n"
+            pass
+        pass
+    if str != strorg :
+        update.message.reply_text(str)
+        pass
     pass
 
 # Allows users to format their text before sending
