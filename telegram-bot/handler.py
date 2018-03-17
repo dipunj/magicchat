@@ -30,10 +30,14 @@ def start(bot, update):
 # invoking the /help command
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('/juice - extract the messages \
+    update.message.reply_text('/juice - extract the messages\
                                /mood - shows the mood of the user(s)\
                                /translate - translate to another language\
-                               /help - prints help\
+                                        eg.\
+                                            /translate de for deutch \
+                                            /translate hi for hindi \
+                                            /translate fr for french \
+                               /help - prints help \
                                /start - shows a greeting message')
 
 # keeps on rolling when the conversation is in progress
@@ -41,11 +45,12 @@ def driver(bot, update):
     # stores username and the text sent by that user
     _shared.chats.append([update.message.from_user.username,update.message.text])
     if _shared.counter < 5:
-        mood(bot,update)
         _shared.counter += 1
         pass
     else :
+        mood(bot,update)
         _shared.counter = 0
+        pass
 
 # juices out the essential information messages stored in global variable chat
 def juice(bot, update):
