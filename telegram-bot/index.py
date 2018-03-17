@@ -1,59 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import logging
+# Modules
+from uuid import uuid4
+from telegram.utils.helpers import escape_markdown
+from telegram import InlineQueryResultArticle,ParseMode,InputTextMessageContent
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, InlineQueryHandler
 
-import juicer, mood
-chats = []
+# Custom modules
+from handler import *
 
 # Enable logging
+import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-
 logger = logging.getLogger(__name__)
-
-
-
-def list2dic(chats):
-    result = dict()
-    for x in chats:
-        if x[0] in result:
-            result[x[0]].append(x[1])
-        else :
-            result[x[0]] = [x[1]]
-        pass
-    return result
-pass
-
-
-# Define a few command handlers. These usually take the two arguments bot and
-# update. Error handlers also receive the raised TelegramError object in error.
-def start(bot, update):
-    """Send a message when the command /start is issued"""
-    # bot.send_message(chat_id=458059323, text="Kesarwani")
-    update.message.reply_text('Hi!')
-
-
-def help(bot, update):
-    """Send a message when the command /help is issued."""
-    update.message.reply_text()
-
-def driver(bot, update):
-    """Record the user messages."""
-    global chats
-    chats.append(update.message.text)
-    # [update.message.from_user.username,
-
-def juice(bot, update):
-    """Prints all the messages."""
-    global chats
-    update.message.reply_text("THE JUICE IS : " + str(juicer.textrank(str(chats))))
-    chats = []
-
-def error(bot, update, error):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, error)
-
 
 def main():
     """Start the bot."""
@@ -67,6 +27,9 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("juice", juice))
+    dp.add_handler(CommandHandler("mood", mood))
+    dp.add_handler(CommandHandler("translate", translate, pass_args=True))
+    dp.add_handler(InlineQueryHandler(formater))
 
     # on noncommand i.e message - driver the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, driver))
