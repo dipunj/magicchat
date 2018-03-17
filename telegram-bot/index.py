@@ -13,6 +13,19 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 
+
+def list2dic(chats):
+    result = dict()
+    for x in chats:
+        if x[0] in result:
+            result[x[0]].append(x[1])
+        else :
+            result[x[0]] = [x[1]]
+        pass
+    return result
+pass
+
+
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
 def start(bot, update):
@@ -28,12 +41,12 @@ def help(bot, update):
 def driver(bot, update):
     """Record the user messages."""
     global chats
-    chats.append(update.message.text)
+    chats.append([update.message.from_user.username,update.message.text])
 
 def juice(bot, update):
     """Prints all the messages."""
     global chats
-    update.message.reply_text("THE JUICE IS : " + str(juicer.textrank(str(chats))))
+    update.message.reply_text("THE JUICE IS : " + str(list2dic(chats)))
     chats = []
 
 def error(bot, update, error):
