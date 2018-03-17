@@ -7,6 +7,7 @@ from nltk.tokenize.punkt import PunktSentenceTokenizer
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
 
 
+# Ranks
 def textrank(document):
     sentence_tokenizer = PunktSentenceTokenizer()
     sentences = sentence_tokenizer.tokenize(document)
@@ -19,12 +20,12 @@ def textrank(document):
     nx_graph = nx.from_scipy_sparse_matrix(similarity_graph)
     scores = nx.pagerank(nx_graph)
     sentence_array = sorted(((scores[i], s) for i, s in enumerate(sentences)), reverse=True)
-    
+
     sentence_array = np.asarray(sentence_array)
-    
+
     fmax = float(sentence_array[0][0])
     fmin = float(sentence_array[len(sentence_array) - 1][0])
-    
+
     temp_array = []
     # Normalization
     for i in range(0, len(sentence_array)):
@@ -35,7 +36,7 @@ def textrank(document):
 
 
     threshold = (sum(temp_array) / len(temp_array)) + 0.2
-    
+
     sentence_list = []
 
     for i in range(0, len(temp_array)):
@@ -46,5 +47,5 @@ def textrank(document):
     for sentence in sentences:
     	if sentence in sentence_list:
     		seq_list.append(sentence)
-    
+
     return seq_list

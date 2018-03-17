@@ -1,7 +1,6 @@
-from webwhatsapi import WhatsAPIDriver
-driver = WhatsAPIDriver(username="Phoenix")
 from summarizer import textrank
 from textblob import TextBlob
+
 import indicoio
 indicoio.config.api_key = 'b09e30618dac907d86f8afb6dbeff68e'
 
@@ -21,11 +20,11 @@ for x in range(len(l)):
 		group[l[x]['contact']] = l[x]['messages']
 	elif :
 		user_chat[l[x]['contact']] = l[x]['messages']
-		
-			
-	
-	
-	
+
+
+
+
+
 group_message = dict()
 user_message = dict()
 
@@ -43,7 +42,7 @@ for key in user_chat:
 	for x in range(uo):
 		ui.append(user_chat[key][x]['message'])
 		user_message[key] = ui
-		
+
 
 list_of_mesg = []
 for key in group_message:
@@ -54,7 +53,7 @@ for key in group_message:
 	text += "."
 	list_of_mesg.append(textrank(text))
 	text=""
-	
+
 
 for key in user_message:
 	if(len(user_message[key]) >= 5):
@@ -92,9 +91,3 @@ def translate_text(_from='en',_to='en'):
 		for y in range(len(list_of_mesg[x])):
 			en_blob = TextBlob(list_of_mesg[x][y])
 			en_blob.translate(from_lang=_from,to=_to)
-			
-
-
-	
-
-
