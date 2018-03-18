@@ -14,13 +14,16 @@ This can be a serious flaw in modern communication, given that humans like to be
 We thought to solve this problem using a clustering algorithm to extract out the vital information(using textRank algorithm), thus saving time and energy.
 To implement such a task we thought to use Telegram's open source API as building from scratch wasn't feasibe.
 
+
+![ScreenShot](./Screenshot.png "In-App Screenshot")
+
 ## USAGE for Telegram Bot
 + juice - extract the messages(using NLP)
 + mood - shows the mood of the user(s)
 + translate - translate to another language
-       translate de for deutch
-       translate hi for hindi
-       translate fr for french
+translate de for deutch
+translate hi for hindi
+translate fr for french
 + help - prints help
 + start - shows a greeting message
 
@@ -28,5 +31,16 @@ To implement such a task we thought to use Telegram's open source API as buildin
 sudo -E pip3.6 python-telegram-bot networkx nltk sklearn scipy indicoio \ googletrans googletrans webwhatsapi
 
 webdrivers
-       - geckodriver for firefox
-       - chromedriver for chrome
+- geckodriver for firefox
+- chromedriver for chrome
+
+
+## Zulip bot
+
+Additional to the telegram bot that we created we have also developed a zulip bot for whatsapp.
+This bot can intercept the messages between chats and in groups and thus produce the desired result as the telegram bot.
+In order to make this possible , we used the Whatapp API by mukulhase.We modified it according to our use.
+In order to use it make sure you have all the modules mentioned in requirements.txt file.
+Run the magicbot.py file and scan the QR code for webwhatsapp and hence your zulip bot is ready.
+Now you can query the zulip bot in the same manner as the telegram bot.
+Only limitation is that your phone needs to be connected to the internet at all times.
