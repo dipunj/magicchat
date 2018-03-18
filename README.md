@@ -44,3 +44,6 @@ In order to use it make sure you have all the modules mentioned in requirements.
 Run the magicbot.py file and scan the QR code for webwhatsapp and hence your zulip bot is ready.
 Now you can query the zulip bot in the same manner as the telegram bot.
 Only limitation is that your phone needs to be connected to the internet at all times.
+
+
+![ScreenShot2](./sc_translate.png "Zulip In-App Screenshot")

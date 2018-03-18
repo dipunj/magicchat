@@ -24,4 +24,7 @@ def summarize(group_message,group_name):
 		print(list_of_mesg)
 		group_chat[key] = list_of_mesg
 		text=""
-	return group_chat[group_name]
+	if group_name in group_message.keys():
+		return group_chat[group_name]
+	else:
+		return "No messages from group"
