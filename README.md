@@ -47,3 +47,7 @@ Only limitation is that your phone needs to be connected to the internet at all 
 
 
 ![ScreenShot2](./sc_translate.png "Zulip In-App Screenshot")
+
+Click
+[here](https://drive.google.com/file/d/1RoIaJ8CydDjp1vy8n812j1m29gI8Dxgm/view)
+for video demo
